@@ -6,7 +6,7 @@
 #    By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/20 23:35:52 by bbellavi          #+#    #+#              #
-#    Updated: 2020/09/21 00:00:54 by bbellavi         ###   ########.fr        #
+#    Updated: 2020/09/21 00:42:27 by bbellavi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC_DIR		= srcs
 
 SRCS		= eval.c
 SRCS		+= $(SRC_DIR)/interpreter.c
+SRCS		+= $(SRC_DIR)/operations.c
 INC_FILES	= $(INC_DIR)/interpreter.h
 
 .PHONY:	all re clean fclean

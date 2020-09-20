@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 00:01:24 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 00:42:07 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ get_next_token(Interpreter_t *inter)
 			inter->index++;
 		return (tok);
 	}
-	else if (current_char == '+')
-		tok = (Token_t){OP, '+'};
+	else if (strchr(SYM_CHARSET, current_char))
+		tok = (Token_t){OP, current_char};
 	else
 		tok = (Token_t){ERR, 0};
 	
@@ -65,22 +65,22 @@ int
 eval(char *input)
 {
 	Interpreter_t	inter = (Interpreter_t){.index = 0, .input = input};
-	Token_t			lval;
-	Token_t			rval;
-	char			op;
+	Token_t			left;
+	Token_t			right;
+	Token_t			op;
 
 	inter.token = get_next_token(&inter);
-	lval = inter.token;
+	left = inter.token;
 	if (eat(&inter, INT) != 0)
 		return (0);
 	
-	op = inter.token.value;
+	op = inter.token;
 	if (eat(&inter, OP) != 0)
 		return (0);
 	
-	rval = inter.token;
+	right = inter.token;
 	if (eat(&inter, INT) != 0)
 		return (0);
-	
-	return (lval.value + rval.value);
+
+	return (do_op(op, left, right));
 }
