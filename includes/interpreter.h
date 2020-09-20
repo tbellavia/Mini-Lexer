@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:21:28 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 01:35:56 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 01:45:39 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ enum Type
 
 enum Interpreter_err
 {
-	INTER_ERR_PARSING_INPUT,
-	INTER_ERR_ZERO_DIVISION,
-	INTER_ERR_UNKNOW_OP_TYPE
+	INTER_ERR_PARSING_INPUT = 1,
+	INTER_ERR_ZERO_DIVISION = 2,
+	INTER_ERR_UNKNOW_OP_TYPE = 3
 };
 
 // symbol charset definition
@@ -79,8 +79,8 @@ static OpCallback_t	op_callbacks[OP_CALLBACK_SIZE] = {
 	{MULT, _mult}
 };
 
-# define _InitInter_Errno(errval) int interpreter_errno = errval;
-# define _SetInter_Errno(errval) interpreter_errno = errval;
+# define _InitInter_Errno(errval) int interpreter_errno = errval
+# define _SetInter_Errno(errval) interpreter_errno = errval
 # define _HasInter_Errno(errval) (errval == interpreter_errno)
 
 #endif

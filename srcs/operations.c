@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 00:15:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 00:59:23 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 01:43:15 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ _div(int left, int right)
 {
 	if (right == 0)
 	{
-		_SetInter_Errno(INTER_ERR_ZERO_DIVISION)
+		_SetInter_Errno(INTER_ERR_ZERO_DIVISION);
 		return (0);
 	}
 	return (left / right);
@@ -40,7 +40,7 @@ _mod(int left, int right)
 {
 	if (right == 0)
 	{
-		_SetInter_Errno(INTER_ERR_ZERO_DIVISION)
+		_SetInter_Errno(INTER_ERR_ZERO_DIVISION);
 		return (0);
 	}
 	return (left % right);
@@ -63,6 +63,6 @@ do_op(Token_t token, Token_t left, Token_t right)
 		if (op_callbacks[index].op == token.value)
 			return (op_callbacks[index].callback(left.value, right.value));
 	}
-	_SetInter_Errno(INTER_ERR_UNKNOW_OP_TYPE)
+	_SetInter_Errno(INTER_ERR_UNKNOW_OP_TYPE);
 	return (0);
 }

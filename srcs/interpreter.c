@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 01:36:04 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 01:45:30 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include "interpreter.h"
 
-_InitInter_Errno(0)
+_InitInter_Errno(0);
 
 static Token_t
 get_next_token(Interpreter_t *inter)
@@ -59,7 +59,7 @@ eat(Interpreter_t *inter, int token_type)
 	if (token_type == inter->token.type)
 		inter->token = get_next_token(inter);
 	else
-		return (INTER_ERR_PARSING_INPUT);
+		return (_SetInter_Errno(INTER_ERR_PARSING_INPUT));
 	return (0);
 }
 
