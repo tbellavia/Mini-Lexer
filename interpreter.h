@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:21:28 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/20 03:53:32 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/20 21:54:51 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct	Token_s
 typedef struct	Interpreter_s
 {
 	Token_t token;
-	int		index;
+	size_t	index;
 	char	*input;
 }				Interpreter_t;
 
