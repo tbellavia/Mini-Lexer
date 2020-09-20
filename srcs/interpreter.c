@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/20 23:32:14 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 00:01:24 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include <stdio.h>
 #include "interpreter.h"
 
-Token_t		get_next_token(Interpreter_t *inter)
+static Token_t
+get_next_token(Interpreter_t *inter)
 {
 	const size_t	len = strlen(inter->input);
 	char			current_char;
@@ -50,7 +51,8 @@ Token_t		get_next_token(Interpreter_t *inter)
 	return (tok);
 }
 
-int		eat(Interpreter_t *inter, int token_type)
+static int
+eat(Interpreter_t *inter, int token_type)
 {
 	if (token_type == inter->token.type)
 		inter->token = get_next_token(inter);
@@ -59,7 +61,8 @@ int		eat(Interpreter_t *inter, int token_type)
 	return (0);
 }
 
-int		eval(char *input)
+int
+eval(char *input)
 {
 	Interpreter_t	inter = (Interpreter_t){.index = 0, .input = input};
 	Token_t			lval;
@@ -80,15 +83,4 @@ int		eval(char *input)
 		return (0);
 	
 	return (lval.value + rval.value);
-}
-
-int		main(int argc, char **argv)
-{
-	if (argc > 1)
-	{
-		int result = eval(argv[1]);
-		
-		printf("> %i\n", result);
-	}
-	return (0);
 }

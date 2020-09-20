@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:21:28 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/20 21:54:51 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/20 23:48:12 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ enum Interpreter_err
 {
 	INTER_ERR_PARSING_INPUT
 };
+
+int		eval(char *input);
 
 #endif
