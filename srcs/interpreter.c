@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 00:42:07 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 01:36:04 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <ctype.h>
 #include <stdio.h>
 #include "interpreter.h"
+
+_InitInter_Errno(0)
 
 static Token_t
 get_next_token(Interpreter_t *inter)

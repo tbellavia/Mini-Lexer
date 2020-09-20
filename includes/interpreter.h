@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:21:28 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 01:01:54 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 01:35:56 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		_mult(int, int);
 int		do_op(Token_t token, Token_t left, Token_t right);
 
 // global variables
-static int			interpreter_errno = 0;
+extern int			interpreter_errno;
 static OpCallback_t	op_callbacks[OP_CALLBACK_SIZE] = {
 	{ADD, _add},
 	{SUB, _sub},
@@ -79,6 +79,7 @@ static OpCallback_t	op_callbacks[OP_CALLBACK_SIZE] = {
 	{MULT, _mult}
 };
 
+# define _InitInter_Errno(errval) int interpreter_errno = errval;
 # define _SetInter_Errno(errval) interpreter_errno = errval;
 # define _HasInter_Errno(errval) (errval == interpreter_errno)
 
