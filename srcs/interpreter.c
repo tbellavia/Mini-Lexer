@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 01:45:30 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 05:19:09 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ get_next_token(Interpreter_t *inter)
 			inter->index++;
 		return (tok);
 	}
-	else if (strchr(SYM_CHARSET, current_char))
+	else if (strchr(OP_CHARSET, current_char))
 		tok = (Token_t){OP, current_char};
 	else
 		tok = (Token_t){ERR, 0};
@@ -67,22 +67,25 @@ int
 eval(char *input)
 {
 	Interpreter_t	inter = (Interpreter_t){.index = 0, .input = input};
-	Token_t			left;
-	Token_t			right;
 	Token_t			op;
+	Token_t			right;
+	int				result = 0;
 
 	inter.token = get_next_token(&inter);
-	left = inter.token;
+	result = inter.token.value;
 	if (eat(&inter, INT) != 0)
 		return (0);
 	
-	op = inter.token;
-	if (eat(&inter, OP) != 0)
-		return (0);
-	
-	right = inter.token;
-	if (eat(&inter, INT) != 0)
-		return (0);
+	while (strchr(OP_CHARSET, inter.token.value))
+	{
+		op = inter.token;
+		if (eat(&inter, OP) != 0)
+			return (0);
+		right = inter.token;
+		if (eat(&inter, INT) != 0)
+			return (0);
+		result = do_op(op, result, right.value);
+	}
 
-	return (do_op(op, left, right));
+	return (result);
 }

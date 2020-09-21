@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:21:28 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 01:45:39 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 04:50:29 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ enum Interpreter_err
 };
 
 // symbol charset definition
-# define SYM_CHARSET "+-%/*"
+# define OP_CHARSET "+-%/*"
 
 // define symbols
 # define ADD	'+'
@@ -67,7 +67,7 @@ int		_sub(int, int);
 int		_div(int, int);
 int		_mod(int, int);
 int		_mult(int, int);
-int		do_op(Token_t token, Token_t left, Token_t right);
+int		do_op(Token_t token, int left, int right);
 
 // global variables
 extern int			interpreter_errno;

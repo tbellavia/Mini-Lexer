@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 00:15:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 01:43:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 04:53:15 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ _sub(int left, int right)
 }
 
 int
-do_op(Token_t token, Token_t left, Token_t right)
+do_op(Token_t token, int left, int right)
 {
 	size_t index;
 
@@ -61,7 +61,7 @@ do_op(Token_t token, Token_t left, Token_t right)
 	for (size_t index = 0; index < OP_CALLBACK_SIZE; index++)
 	{
 		if (op_callbacks[index].op == token.value)
-			return (op_callbacks[index].callback(left.value, right.value));
+			return (op_callbacks[index].callback(left, right));
 	}
 	_SetInter_Errno(INTER_ERR_UNKNOW_OP_TYPE);
 	return (0);
