@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 05:19:09 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 05:25:09 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ get_next_token(Interpreter_t *inter)
 	}
 	else if (strchr(OP_CHARSET, current_char))
 		tok = (Token_t){OP, current_char};
+	else if (inter->index == len - 1)
+		tok = (Token_t){_EOF, 0};
 	else
 		tok = (Token_t){ERR, 0};
 	
@@ -76,7 +78,7 @@ eval(char *input)
 	if (eat(&inter, INT) != 0)
 		return (0);
 	
-	while (strchr(OP_CHARSET, inter.token.value))
+	while (strchr(OP_CHARSET, inter.token.value) && inter.token.type != _EOF)
 	{
 		op = inter.token;
 		if (eat(&inter, OP) != 0)
@@ -86,6 +88,6 @@ eval(char *input)
 			return (0);
 		result = do_op(op, result, right.value);
 	}
-
+	
 	return (result);
 }
