@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/21 00:15:19 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 04:53:15 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/21 13:07:19 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ _add(int left, int right)
 {
 	return (left + right);
 }
-#include <stdio.h>
+
 int
 _div(int left, int right)
 {
