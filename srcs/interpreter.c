@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/24 05:53:26 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/24 06:02:47 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,19 @@ term(Interpreter_t *inter)
 static int
 expr(Interpreter_t *inter)
 {
-	int result = 0;
+	Token_t op;
+	int		result = 0;
 
 	result = term(inter);
 	if (interpreter_errno != 0)
 		return (0);
 	while (strchr(OP_PRECEDENCE_2, inter->token.value) && inter->token.type != _EOF)
 	{
-		result += term(inter);
+		op = inter->token;
+		if (eat(inter, OP) != 0)
+			return (0);
+
+		result = do_op(op, result, term(inter));
 		if (interpreter_errno != 0)
 			return (0);
 	}
