@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:24:12 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 05:25:09 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/24 05:53:26 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,29 +65,56 @@ eat(Interpreter_t *inter, int token_type)
 	return (0);
 }
 
-int
-eval(char *input)
+static int
+term(Interpreter_t *inter)
 {
-	Interpreter_t	inter = (Interpreter_t){.index = 0, .input = input};
-	Token_t			op;
-	Token_t			right;
-	int				result = 0;
+	Token_t	op;
+	Token_t	right;
+	int		result = 0;
 
-	inter.token = get_next_token(&inter);
-	result = inter.token.value;
-	if (eat(&inter, INT) != 0)
+	inter->token = get_next_token(inter);
+	result = inter->token.value;
+	if (eat(inter, INT) != 0)
 		return (0);
-	
-	while (strchr(OP_CHARSET, inter.token.value) && inter.token.type != _EOF)
+		
+	while (strchr(OP_PRECEDENCE_1, inter->token.value) && inter->token.type != _EOF)
 	{
-		op = inter.token;
-		if (eat(&inter, OP) != 0)
+		op = inter->token;
+		if (eat(inter, OP) != 0)
 			return (0);
-		right = inter.token;
-		if (eat(&inter, INT) != 0)
+		right = inter->token;
+		if (eat(inter, INT) != 0)
 			return (0);
 		result = do_op(op, result, right.value);
 	}
-	
+
 	return (result);
+}
+
+static int
+expr(Interpreter_t *inter)
+{
+	int result = 0;
+
+	result = term(inter);
+	if (interpreter_errno != 0)
+		return (0);
+	while (strchr(OP_PRECEDENCE_2, inter->token.value) && inter->token.type != _EOF)
+	{
+		result += term(inter);
+		if (interpreter_errno != 0)
+			return (0);
+	}
+	return (result);
+}
+
+int
+eval(char *input)
+{
+	Interpreter_t	inter = (Interpreter_t){
+		.index = 0,
+		.input = input
+	};
+
+	return (expr(&inter));
 }

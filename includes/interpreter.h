@@ -6,7 +6,7 @@
 /*   By: bbellavi <bbellavi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 03:21:28 by bbellavi          #+#    #+#             */
-/*   Updated: 2020/09/21 04:50:29 by bbellavi         ###   ########.fr       */
+/*   Updated: 2020/09/24 05:37:00 by bbellavi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ enum Interpreter_err
 
 // symbol charset definition
 # define OP_CHARSET "+-%/*"
+# define OP_PRECEDENCE_1 "/*%"
+# define OP_PRECEDENCE_2 "+-"
 
 // define symbols
 # define ADD	'+'
